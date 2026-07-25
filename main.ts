@@ -1,6 +1,6 @@
 import { identifySemanticContent } from "./src/semantic-content-identity.mjs";
 
-const manifest = "ni:///sha-256;mWRxIJhaj3_I9fIOCvNQitWkW0Mjy7c9wp1eH2hQS8E";
+const manifest = "ni:///sha-256;sJ25jrJSd7X1PHrS4ca6gIhKDb-ZkwUT14S5f1Ap-cA";
 const headers = {
   "content-type": "application/json",
   "x-capability-manifest": manifest,
