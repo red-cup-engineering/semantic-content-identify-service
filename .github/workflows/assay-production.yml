@@ -1,0 +1,41 @@
+name: Assay production face
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  assay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Observe health and known semantic identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://semantic-identity-cell.emsenn.deno.net'
+          manifest='ni:///sha-256;mWRxIJhaj3_I9fIOCvNQitWkW0Mjy7c9wp1eH2hQS8E'
+          star='ni:///sha-256;U3uKJJT0vR4Qw4-gzCLa9apzf5Y3QXY-dXiIFV5IPA4'
+
+          curl --fail --silent --show-error \
+            --dump-header health.headers \
+            --output health.json \
+            "$endpoint/health"
+          grep -Fqi "x-capability-manifest: $manifest" health.headers
+          jq -e --arg manifest "$manifest" \
+            '.ok == true and .manifest == $manifest' health.json
+
+          curl --fail --silent --show-error \
+            --dump-header invoke.headers \
+            --header 'content-type: application/json' \
+            --data '{"value":["star"]}' \
+            --output invoke.json \
+            "$endpoint/invoke"
+          grep -Fqi "x-capability-manifest: $manifest" invoke.headers
+          jq -e --arg star "$star" \
+            '.id == $star
+             and .algorithm == "sha-256"
+             and .mediaType == "application/rmn+cbor"
+             and .value == ["star"]
+             and .bytes == "gWRzdGFy"' invoke.json
