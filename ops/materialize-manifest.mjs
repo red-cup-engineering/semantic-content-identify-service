@@ -9,7 +9,7 @@ import {
 } from "@emsenn/rmn-semantic-conformance-die";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const manifest = parseRml(readFileSync(resolve(root, "content/contracts/semantic-content-identity.rml"), "utf8"));
+const manifest = parseRml(readFileSync(resolve(root, "content/manifests/capability-cell.rml"), "utf8"));
 const bytes = semanticBytes(manifest);
 const id = semanticId(manifest);
 const directory = resolve(root, "data/manifest");

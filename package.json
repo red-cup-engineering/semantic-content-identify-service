@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/semantic-content-identify-service",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": false,
   "type": "module",
   "description": "Returns the canonical RMN CBOR bytes and RFC 6920 ni URI for one admitted semantic value.",
@@ -48,18 +48,21 @@
   "x-agentic-metro-enterprise": {
     "node-id": "semantic-content-identify-service",
     "actor": "urn:ame:semantic-content-identify-service",
-    "organizational-kind": "capability-cell-candidate",
+    "organizational-kind": "capability-cell",
     "owners": [
       "red-cup-engineering"
     ],
     "operation-catalog": {
       "semantic-content-identity": {
-        "contract": "ni:///sha-256;mWRxIJhaj3_I9fIOCvNQitWkW0Mjy7c9wp1eH2hQS8E",
+        "sku": "ni:///sha-256;zOsUbX-5pVydTJ4mYXs-k3Ny5k5ulszvgPCpjHjDPKY",
+        "contract": "ni:///sha-256;gis-jrlPVvpJjKAfFu-zpoXrgHCuS1Wi__Yi3ENFy8w",
         "action": "https://semantic-identity-cell.emsenn.deno.net/invoke",
+        "activityPubActor": "https://bare-cedar-fog.561.group/actors/semantic-content-identify-service",
         "accepts": "one admitted RMN semantic value",
         "returns": "canonical RMN CBOR bytes and RFC 6920 SHA-256 ni URI",
         "protocols": [
-          "HTTPS"
+          "HTTPS",
+          "ActivityPub"
         ]
       }
     }

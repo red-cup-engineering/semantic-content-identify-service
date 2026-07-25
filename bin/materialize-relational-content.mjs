@@ -22,7 +22,10 @@ const value = JSON.parse(readFileSync(0, "utf8"));
 const encoded = encodeRelationalValue(value);
 const term = ["ascribe", encoded.type, encoded.term];
 const bytes = semanticBytes(term);
-if (output !== undefined) writeFileSync(output, bytes, { flag: "wx", mode: 0o644 });
+if (output !== undefined) writeFileSync(output, bytes, {
+  flag: process.argv.includes("--replace") ? "w" : "wx",
+  mode: 0o644,
+});
 process.stdout.write(`${JSON.stringify({
   id: semanticId(term),
   mediaType: "application/rmn+cbor",
