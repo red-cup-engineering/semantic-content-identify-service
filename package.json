@@ -22,7 +22,8 @@
     "provenance": true
   },
   "bin": {
-    "semantic-content-identity": "./bin/semantic-content-identity.mjs"
+    "semantic-content-identity": "./bin/semantic-content-identity.mjs",
+    "materialize-relational-content": "./bin/materialize-relational-content.mjs"
   },
   "exports": {
     ".": {
