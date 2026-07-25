@@ -2,7 +2,7 @@
 (map
   ("type" "CapabilityCellManifest")
   ("version" 1)
-  ("actor" "urn:ame:semantic-content-identity-cell")
+  ("actor" "urn:ame:semantic-content-identify-service")
   ("capability" "semantic-content-identity")
   ("action" "https://semantic-content-identity.actions.561.group/invoke")
   ("input" "one admitted RMN semantic value")
@@ -10,4 +10,4 @@
   ("output" "the normalized value, canonical bytes, media type, algorithm, and ni URI")
   ("authority" "none")
   ("chain" "eip155:5615610")
-  ("package" "@red-cup-engineering/semantic-content-identity-cell"))
+  ("package" "@red-cup-engineering/semantic-content-identify-service"))

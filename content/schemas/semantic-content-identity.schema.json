@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/red-cup-engineering/semantic-content-identity-cell/blob/main/content/schemas/semantic-content-identity.schema.json",
+  "$id": "https://github.com/red-cup-engineering/semantic-content-identify-service/blob/main/content/schemas/semantic-content-identity.schema.json",
   "type": "object",
   "required": ["id", "algorithm", "mediaType", "value", "bytes"],
   "properties": {

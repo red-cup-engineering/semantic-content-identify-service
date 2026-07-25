@@ -1,5 +1,5 @@
 {
-  "name": "@red-cup-engineering/semantic-content-identity-cell",
+  "name": "@red-cup-engineering/semantic-content-identify-service",
   "version": "0.1.3",
   "private": false,
   "type": "module",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/red-cup-engineering/semantic-content-identity-cell.git"
+    "url": "git+https://github.com/red-cup-engineering/semantic-content-identify-service.git"
   },
   "homepage": "https://semantic-content-identity.actions.561.group/",
   "publishConfig": {
@@ -45,8 +45,8 @@
     "node": ">=22"
   },
   "x-agentic-metro-enterprise": {
-    "node-id": "semantic-content-identity-cell",
-    "actor": "urn:ame:semantic-content-identity-cell",
+    "node-id": "semantic-content-identify-service",
+    "actor": "urn:ame:semantic-content-identify-service",
     "organizational-kind": "capability-cell",
     "owners": [
       "red-cup-engineering"
