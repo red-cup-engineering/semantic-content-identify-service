@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/semantic-content-identify-service",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "type": "module",
   "description": "Returns the canonical RMN CBOR bytes and RFC 6920 ni URI for one admitted semantic value.",
@@ -48,14 +48,14 @@
   "x-agentic-metro-enterprise": {
     "node-id": "semantic-content-identify-service",
     "actor": "urn:ame:semantic-content-identify-service",
-    "organizational-kind": "capability-cell",
+    "organizational-kind": "capability-cell-candidate",
     "owners": [
       "red-cup-engineering"
     ],
     "operation-catalog": {
       "semantic-content-identity": {
-        "contract": "ni:///sha-256;OtUKbBuMSgqNM8L3RurEBv66UEui5HfTLXiXi5cPY9A",
-        "action": "https://semantic-content-identity.actions.561.group/invoke",
+        "contract": "ni:///sha-256;mWRxIJhaj3_I9fIOCvNQitWkW0Mjy7c9wp1eH2hQS8E",
+        "action": "https://semantic-identity-cell.emsenn.deno.net/invoke",
         "accepts": "one admitted RMN semantic value",
         "returns": "canonical RMN CBOR bytes and RFC 6920 SHA-256 ni URI",
         "protocols": [
