@@ -4,7 +4,7 @@
   },
   "deploy": {
     "org": "emsenn",
-    "app": "semantic-content-identity-cell",
+    "app": "semantic-identity-cell",
     "runtime": {
       "type": "dynamic",
       "entrypoint": "build/main.js"
