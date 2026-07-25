@@ -1,0 +1,23 @@
+{
+  "name": "@red-cup-engineering/semantic-content-identity-cell",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Returns the canonical RMN CBOR bytes and RFC 6920 ni URI for one admitted semantic value.",
+  "keywords": [
+    "rmn",
+    "cbor",
+    "rfc6920",
+    "semantic-identity",
+    "capability-cell"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/semantic-content-identity-cell.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
