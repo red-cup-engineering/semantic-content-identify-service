@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/semantic-content-identity-cell",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "type": "module",
   "description": "Returns the canonical RMN CBOR bytes and RFC 6920 ni URI for one admitted semantic value.",
@@ -43,6 +43,25 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "x-agentic-metro-enterprise": {
+    "node-id": "semantic-content-identity-cell",
+    "actor": "urn:ame:semantic-content-identity-cell",
+    "organizational-kind": "capability-cell",
+    "owners": [
+      "red-cup-engineering"
+    ],
+    "operation-catalog": {
+      "semantic-content-identity": {
+        "contract": "ni:///sha-256;OtUKbBuMSgqNM8L3RurEBv66UEui5HfTLXiXi5cPY9A",
+        "action": "https://semantic-content-identity.actions.561.group/invoke",
+        "accepts": "one admitted RMN semantic value",
+        "returns": "canonical RMN CBOR bytes and RFC 6920 SHA-256 ni URI",
+        "protocols": [
+          "HTTPS"
+        ]
+      }
+    }
   },
   "dependencies": {
     "@emsenn/rmn-semantic-conformance-die": "https://github.com/emsenn/rmn-semantic-conformance-die/releases/download/v6.0.0/emsenn-rmn-semantic-conformance-die-6.0.0.tgz"

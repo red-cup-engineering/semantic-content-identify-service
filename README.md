@@ -13,5 +13,8 @@ Action identity:
 Current cloud carrier:
 `https://semantic-identity-cell.emsenn.deno.net/invoke`
 
+Settlement account:
+`eip155:5615610:0xfd4e359353e59db2b33582fffa20f99291048384`
+
 The action hostname is the stable customer-facing identity. The carrier may
 change without changing the action being contracted.
