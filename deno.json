@@ -7,9 +7,10 @@
     "app": "semantic-content-identity-cell",
     "runtime": {
       "type": "dynamic",
-      "entrypoint": "main.ts"
+      "entrypoint": "build/main.js"
     }
   }
 }
+
 
 
