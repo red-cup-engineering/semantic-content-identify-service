@@ -1,0 +1,12 @@
+#lang rmn/v2
+(map
+  ("type" "CapabilityCellManifest")
+  ("version" 1)
+  ("actor" "urn:ame:semantic-content-identity-cell")
+  ("capability" "semantic-content-identity")
+  ("input" "one admitted RMN semantic value")
+  ("effect" "derive its canonical RMN CBOR bytes and RFC 6920 SHA-256 ni URI")
+  ("output" "the normalized value, canonical bytes, media type, algorithm, and ni URI")
+  ("authority" "none")
+  ("chain" "eip155:5615610")
+  ("package" "@red-cup-engineering/semantic-content-identity-cell"))

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/red-cup-engineering/semantic-content-identity-cell/blob/main/content/schemas/semantic-content-identity.schema.json",
+  "type": "object",
+  "required": ["id", "algorithm", "mediaType", "value", "bytes"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^ni:///sha-256;[A-Za-z0-9_-]{43}$"},
+    "algorithm": {"const": "sha-256"},
+    "mediaType": {"const": "application/rmn+cbor"},
+    "value": {},
+    "bytes": {"type": "string", "contentEncoding": "base64"}
+  },
+  "additionalProperties": false
+}
