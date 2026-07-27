@@ -6,7 +6,7 @@ import {
   parseRml,
   semanticBytes,
   semanticId,
-} from "@emsenn/rmn-semantic-conformance-die";
+} from "@lenticule-science/rmn-semantic-conformance-die";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = parseRml(readFileSync(resolve(root, "content/manifests/capability-cell.rml"), "utf8"));

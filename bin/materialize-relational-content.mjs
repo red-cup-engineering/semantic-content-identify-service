@@ -4,10 +4,10 @@ import { readFileSync, writeFileSync } from "node:fs";
 import {
   semanticBytes,
   semanticId,
-} from "@emsenn/rmn-semantic-conformance-die";
+} from "@lenticule-science/rmn-semantic-conformance-die";
 import {
   encodeRelationalValue,
-} from "@emsenn/rmn-semantic-conformance-die/relational-value";
+} from "@lenticule-science/rmn-semantic-conformance-die/relational-value";
 
 function option(name) {
   const index = process.argv.indexOf(name);

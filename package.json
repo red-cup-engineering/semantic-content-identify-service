@@ -68,6 +68,24 @@
     }
   },
   "dependencies": {
-    "@emsenn/rmn-semantic-conformance-die": "https://github.com/emsenn/rmn-semantic-conformance-die/releases/download/v6.0.0/emsenn-rmn-semantic-conformance-die-6.0.0.tgz"
+    "@lenticule-science/rmn-semantic-conformance-die": "6.0.0"
+  },
+  "x-semiotic-voxel": {
+    "profile": "org.harmonious-union.semiotic-voxel.v1",
+    "owner": "red-cup-engineering",
+    "kind": "capability-cell",
+    "actor": "urn:ame:semantic-content-identify-service",
+    "operations": [
+      "semantic-content-identity"
+    ],
+    "capabilities": [
+      {
+        "capability": "semantic-content-identify-service",
+        "faces": [
+          "semantic-content-identity"
+        ]
+      }
+    ],
+    "package": "@red-cup-engineering/semantic-content-identify-service"
   }
 }
