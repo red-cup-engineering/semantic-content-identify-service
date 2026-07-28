@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=exec
-WorkingDirectory=/home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/semiotic-services-section/services/semantic-content-identify-service
+WorkingDirectory=/home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/software-services-section/semiotic-services-section/services/semantic-content-identify-service
 Environment=NODE_ENV=production
 Environment=HOST=127.0.0.1
 Environment=PORT=15624
@@ -18,7 +18,7 @@ Environment=ACTIVITYPUB_CONTROLLER=did:pkh:eip155:5615610:0x2d7ae44907ebf6f8b884
 Environment=ACTIVITYPUB_KEYS_PATH=/home/emsenn/.local/share/emsenn/activitypub/semantic-content-identify-service.json
 Environment=ACTIVITYPUB_STATE_PATH=/home/emsenn/.local/share/emsenn/activitypub/semantic-content-identify-service.jsonl
 Environment=ACTIVITYPUB_INBOX_BEARER_TOKEN_FILE=/home/emsenn/.local/share/emsenn/activitypub/semantic-content-identify-service-inbox.token
-ExecStart=/home/emsenn/.config/nvm/versions/node/v24.13.1/bin/node /home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/web-services-section/services/activitypub-services-section/src/server.mjs
+ExecStart=/home/emsenn/.config/nvm/versions/node/v24.13.1/bin/node /home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/software-services-section/web-services-section/services/activitypub-services-section/src/server.mjs
 Restart=always
 RestartSec=2
 TimeoutStopSec=10
