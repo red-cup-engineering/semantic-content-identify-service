@@ -2,7 +2,7 @@ import {
   decodeSemantic,
   semanticBytes,
   semanticId,
-} from "@lenticule-science/rmn-semantic-conformance-die";
+} from "@red-cup-engineering/rmn-semantic-conformance-die";
 
 export function identifySemanticContent(value) {
   const bytes = semanticBytes(value);

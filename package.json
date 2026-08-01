@@ -46,6 +46,6 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@lenticule-science/rmn-semantic-conformance-die": "6.0.1"
+    "@red-cup-engineering/rmn-semantic-conformance-die": "6.0.1"
   }
 }
