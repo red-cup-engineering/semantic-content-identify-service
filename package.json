@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/semantic-content-identify-service",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "type": "module",
   "description": "Returns the canonical RMN CBOR bytes and RFC 6920 ni URI for one admitted semantic value.",
@@ -22,8 +22,8 @@
     "provenance": true
   },
   "bin": {
-    "semantic-content-identity": "./bin/semantic-content-identity.mjs",
-    "materialize-relational-content": "./bin/materialize-relational-content.mjs"
+    "semantic-content-identity": "./scripts/semantic-content-identity.mjs",
+    "materialize-relational-content": "./scripts/materialize-relational-content.mjs"
   },
   "exports": {
     ".": {
@@ -32,7 +32,7 @@
     }
   },
   "files": [
-    "bin/",
+    "scripts/",
     "content/",
     "src/",
     "types/"
