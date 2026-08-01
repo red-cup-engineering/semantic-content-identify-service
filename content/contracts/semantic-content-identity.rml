@@ -1,8 +1,0 @@
-#lang rmn/v2
-(map
-  ("type" "SemanticContentIdentityLaw")
-  ("version" 1)
-  ("precondition" "Receive exactly one admitted RMN semantic value.")
-  ("operation" "Normalize the value through the released RMN semantic conformance die, encode its canonical RMN CBOR bytes, and derive its RFC 6920 SHA-256 ni URI.")
-  ("postcondition" "Return the normalized semantic value, exact canonical bytes, application/rmn+cbor media type, sha-256 algorithm, and ni URI; repeated equal semantic inputs return byte-identical results.")
-  ("refusal" "Refuse any value the released RMN semantic conformance die cannot normalize or canonically encode."))
