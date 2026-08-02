@@ -46,6 +46,6 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@red-cup-engineering/rmn-semantic-conformance-die": "6.0.1"
+    "@red-cup-engineering/relation-model-notation-runtime": "7.0.0"
   }
 }

@@ -2,7 +2,7 @@ import {
   decodeSemantic,
   semanticBytes,
   semanticId,
-} from "@red-cup-engineering/rmn-semantic-conformance-die";
+} from "@red-cup-engineering/relation-model-notation-runtime";
 
 export function identifySemanticContent(value) {
   const bytes = semanticBytes(value);
