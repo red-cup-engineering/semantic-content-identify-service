@@ -1,10 +1,25 @@
 # Semantic Content Identify Service
 
-A public one-operation Capability Cell: derive canonical RMN CBOR bytes and an
-RFC 6920 SHA-256 `ni` URI from one semantic value.
+A public Capability Cell that binds the distinctions required before semantic
+identity in one normalized RMN v2 envelope:
+
+- `identifyNormalizedSemanticContent(...)` admits an explicitly typed term,
+  normalizes it under `urn:rce:rmn:normalize:0.0.1`, rechecks its type, binds
+  identity settlement and a canonical witness root, then addresses the v2 RMN
+  envelope's deterministic CBOR bytes;
+- `admitNormalizedSemanticContent(bytes, token)` and
+  `verifyNormalizedSemanticContent(token, envelope)` reconstruct and verify
+  that commitment without treating the token as a meaning surface.
+
+This boundary does not derive predication, evidence polarity, FOUR, or
+settlement from a convenient carrier shape. Those must arrive as already
+admitted typed material from the systems that implement their laws.
+
+The HTTP `POST /invoke` boundary accepts exactly `{ "content": ... }` for
+normalized typed material. Unframed material is not admitted.
 
 ```sh
-printf '["star"]' | semantic-content-identity
+printf '%s' '{"objectKind":"example.unit","semanticType":["unit"],"term":["star"],"witnessRoot":"ni:///sha-256;jVlIFCTzrK6X_jbpZDTLiahcaPh5t7BNeW9nP2nVDNY"}' | semantic-content-identity
 ```
 
 Current HTTPS action and cloud carrier:

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync } from "node:fs";
-import { identifySemanticContent } from "../src/semantic-content-identity.mjs";
+import { identifyNormalizedSemanticContent } from "../src/semantic-content-identity.mjs";
 
-const value = JSON.parse(readFileSync(0, "utf8"));
-const identity = identifySemanticContent(value);
+const content = JSON.parse(readFileSync(0, "utf8"));
+const identity = identifyNormalizedSemanticContent(content);
 const { bytes, ...receipt } = identity;
 const outputIndex = process.argv.indexOf("--output");
 const output = outputIndex === -1 ? undefined : process.argv[outputIndex + 1];
