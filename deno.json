@@ -1,0 +1,15 @@
+{
+  "tasks": {
+    "start": "deno run --allow-net main.ts"
+  },
+  "deploy": {
+    "org": "emsenn",
+    "app": "semantic-identity-cell",
+    "runtime": {
+      "type": "dynamic",
+      "entrypoint": "build/main.js"
+    }
+  }
+}
+
+
