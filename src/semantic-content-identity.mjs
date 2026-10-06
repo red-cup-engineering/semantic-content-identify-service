@@ -30,11 +30,18 @@ const V2_KEYS = Object.freeze([
 /** Explicit root for semantic material whose named settlement profile consumes
  * no evidential witnesses. This is a raw canonical-carrier commitment, not a
  * second semantic identity law. */
+export function sha256NiUriFromDigestBytes(digestBytes) {
+  if (!(digestBytes instanceof Uint8Array) || digestBytes.byteLength !== 32) {
+    throw refusal("malformed-content-address", "SHA-256 digest must be exactly 32 bytes");
+  }
+  return `${NI_PREFIX}${Buffer.from(digestBytes).toString("base64url")}`;
+}
+
 export function sha256NiUri(bytes) {
   if (!(bytes instanceof Uint8Array)) {
     throw refusal("malformed-content-address", "bytes must be a Uint8Array");
   }
-  return `${NI_PREFIX}${createHash("sha256").update(bytes).digest("base64url")}`;
+  return sha256NiUriFromDigestBytes(createHash("sha256").update(bytes).digest());
 }
 
 export const EMPTY_WITNESS_ROOT = sha256NiUri(normalizedCarrierBytes(Object.freeze({
