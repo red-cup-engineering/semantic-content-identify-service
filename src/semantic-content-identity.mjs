@@ -3,10 +3,27 @@ import {
   normalizedCarrierBytes,
 } from "@red-cup-engineering/relation-model-notation-cbor-codec";
 import { isDeepStrictEqual } from "node:util";
-import { createHash } from "node:crypto";
 import { normalize as normalizeRmn001 } from "@red-cup-engineering/relation-model-notation-eval";
 import { jsonToTerm, termToJson } from "@red-cup-engineering/relation-model-notation-json-codec";
 import { checkTy, inferTy, isClosed } from "@red-cup-engineering/relation-model-notation-typing";
+import {
+  CANONICAL_SHA256_NI_PATTERN_SOURCE,
+  isCanonicalSha256NiUri,
+  sha256DigestBytesFromNiUri,
+  sha256DigestFromNiUri,
+  sha256NiUri,
+  sha256NiUriFromDigestBytes,
+  verifySha256NiUri,
+} from "./ni.mjs";
+export {
+  CANONICAL_SHA256_NI_PATTERN_SOURCE,
+  isCanonicalSha256NiUri,
+  sha256DigestBytesFromNiUri,
+  sha256DigestFromNiUri,
+  sha256NiUri,
+  sha256NiUriFromDigestBytes,
+  verifySha256NiUri,
+} from "./ni.mjs";
 
 export const RMN_NORMALIZATION_PROFILE = "urn:rce:rmn:normalize:0.0.1";
 export const IDENTITY_SETTLEMENT_PROFILE = "urn:rce:settlement:identity:0.0.1";
@@ -14,9 +31,6 @@ export const GENERATIVE_PROOF_PATH_PROFILE = "urn:rce:proof-path:generative:0.0.
 export const PROOF_PATH_WITNESS_KIND = "semiotic-content.proof-path-witness";
 
 const V2_KIND = "relation-model-notation.normalized-semantic-content";
-export const CANONICAL_SHA256_NI_PATTERN_SOURCE = "ni:///sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]";
-const NI_PATTERN = new RegExp(`^${CANONICAL_SHA256_NI_PATTERN_SOURCE}$`, "u");
-const NI_PREFIX = "ni:///sha-256;";
 const V2_KEYS = Object.freeze([
   "kind",
   "version",
@@ -27,23 +41,6 @@ const V2_KEYS = Object.freeze([
   "settledBody",
   "witnessRoot",
 ]);
-
-/** Explicit root for semantic material whose named settlement profile consumes
- * no evidential witnesses. This is a raw canonical-carrier commitment, not a
- * second semantic identity law. */
-export function sha256NiUriFromDigestBytes(digestBytes) {
-  if (!(digestBytes instanceof Uint8Array) || digestBytes.byteLength !== 32) {
-    throw refusal("malformed-content-address", "SHA-256 digest must be exactly 32 bytes");
-  }
-  return `${NI_PREFIX}${Buffer.from(digestBytes).toString("base64url")}`;
-}
-
-export function sha256NiUri(bytes) {
-  if (!(bytes instanceof Uint8Array)) {
-    throw refusal("malformed-content-address", "bytes must be a Uint8Array");
-  }
-  return sha256NiUriFromDigestBytes(createHash("sha256").update(bytes).digest());
-}
 
 export const EMPTY_WITNESS_ROOT = sha256NiUri(normalizedCarrierBytes(Object.freeze({
   kind: "semantic-content.empty-witness-bundle",
@@ -85,27 +82,6 @@ function canonicalNi(value, field) {
     throw refusal("malformed-content-address", `${field} must be one canonical RFC 6920 SHA-256 ni URI`);
   }
   return value;
-}
-
-export function isCanonicalSha256NiUri(value) {
-  if (typeof value !== "string" || !NI_PATTERN.test(value)) return false;
-  const encoded = value.slice(NI_PREFIX.length);
-  const digest = Buffer.from(encoded, "base64url");
-  return digest.length === 32 && digest.toString("base64url") === encoded;
-}
-
-export function sha256DigestFromNiUri(value) {
-  if (!isCanonicalSha256NiUri(value)) throw refusal("malformed-content-address", "value must be one canonical RFC 6920 SHA-256 ni URI");
-  return value.slice(NI_PREFIX.length);
-}
-
-export function sha256DigestBytesFromNiUri(value) {
-  return Buffer.from(sha256DigestFromNiUri(value), "base64url");
-}
-
-export function verifySha256NiUri(bytes, value) {
-  if (!(bytes instanceof Uint8Array) || !isCanonicalSha256NiUri(value)) return false;
-  return createHash("sha256").update(bytes).digest().equals(sha256DigestBytesFromNiUri(value));
 }
 
 function canonicalString(value, field) {
