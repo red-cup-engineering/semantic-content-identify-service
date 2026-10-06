@@ -15,23 +15,7 @@ export const PROOF_PATH_WITNESS_KIND = "semiotic-content.proof-path-witness";
 
 const V2_KIND = "relation-model-notation.normalized-semantic-content";
 export const CANONICAL_SHA256_NI_PATTERN_SOURCE = "ni:///sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]";
-const NI_PATTERN = new RegExp(`^${CANONICAL_SHA256_NI_PATTERN_SOURCE}import {
-  decodeNormalizedCarrier,
-  normalizedCarrierBytes,
-} from "@red-cup-engineering/relation-model-notation-cbor-codec";
-import { isDeepStrictEqual } from "node:util";
-import { createHash } from "node:crypto";
-import { normalize as normalizeRmn001 } from "@red-cup-engineering/relation-model-notation-eval";
-import { jsonToTerm, termToJson } from "@red-cup-engineering/relation-model-notation-json-codec";
-import { checkTy, inferTy, isClosed } from "@red-cup-engineering/relation-model-notation-typing";
-
-export const RMN_NORMALIZATION_PROFILE = "urn:rce:rmn:normalize:0.0.1";
-export const IDENTITY_SETTLEMENT_PROFILE = "urn:rce:settlement:identity:0.0.1";
-export const GENERATIVE_PROOF_PATH_PROFILE = "urn:rce:proof-path:generative:0.0.1";
-export const PROOF_PATH_WITNESS_KIND = "semiotic-content.proof-path-witness";
-
-const V2_KIND = "relation-model-notation.normalized-semantic-content";
-, "u");
+const NI_PATTERN = new RegExp(`^${CANONICAL_SHA256_NI_PATTERN_SOURCE}$`, "u");
 const NI_PREFIX = "ni:///sha-256;";
 const V2_KEYS = Object.freeze([
   "kind",
