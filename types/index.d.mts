@@ -8,7 +8,10 @@ export interface SemanticContentIdentity {
 
 export declare const RMN_NORMALIZATION_PROFILE: "urn:rce:rmn:normalize:0.0.1";
 export declare const IDENTITY_SETTLEMENT_PROFILE: "urn:rce:settlement:identity:0.0.1";
+export declare const GENERATIVE_PROOF_PATH_PROFILE: "urn:rce:proof-path:generative:0.0.1";
+export declare const PROOF_PATH_WITNESS_KIND: "semiotic-content.proof-path-witness";
 export declare const EMPTY_WITNESS_ROOT: `ni:///sha-256;${string}`;
+export declare function sha256NiUri(bytes: Uint8Array): `ni:///sha-256;${string}`;
 export declare function isCanonicalSha256NiUri(value: unknown): value is `ni:///sha-256;${string}`;
 export declare function sha256DigestFromNiUri(value: unknown): string;
 export declare function sha256DigestBytesFromNiUri(value: unknown): Uint8Array;
@@ -48,6 +51,32 @@ export declare function identifyJsonSemanticContent<Value = unknown>(content: {
   objectKind: string;
   value: Value;
   witnessRoot: `ni:///sha-256;${string}`;
+}): NormalizedSemanticContentIdentity;
+
+export interface GenerativeProofPathWitnessInput {
+  structureRoot: `ni:///sha-256;${string}`;
+  sourceKey: string;
+  targetKey: string;
+  path: string;
+  proofProfile?: typeof GENERATIVE_PROOF_PATH_PROFILE;
+  witnessRoot?: `ni:///sha-256;${string}`;
+}
+
+export declare function identifyProofPathWitness(
+  content: GenerativeProofPathWitnessInput,
+): NormalizedSemanticContentIdentity;
+
+export declare function identifyProofPathedJsonSemanticContent<Value = unknown>(content: {
+  objectKind: string;
+  value: Value;
+  proofPathWitnessRoot: `ni:///sha-256;${string}`;
+}): NormalizedSemanticContentIdentity;
+
+export declare function identifyProofPathedBytesSemanticContent(content: {
+  objectKind: string;
+  bytes: Uint8Array;
+  mediaType?: string;
+  proofPathWitnessRoot: `ni:///sha-256;${string}`;
 }): NormalizedSemanticContentIdentity;
 export declare function identifyBytesSemanticContent(content: {
   objectKind: string;
