@@ -10,6 +10,8 @@ import { checkTy, inferTy, isClosed } from "@red-cup-engineering/relation-model-
 
 export const RMN_NORMALIZATION_PROFILE = "urn:rce:rmn:normalize:0.0.1";
 export const IDENTITY_SETTLEMENT_PROFILE = "urn:rce:settlement:identity:0.0.1";
+export const GENERATIVE_PROOF_PATH_PROFILE = "urn:rce:proof-path:generative:0.0.1";
+export const PROOF_PATH_WITNESS_KIND = "semiotic-content.proof-path-witness";
 
 const V2_KIND = "relation-model-notation.normalized-semantic-content";
 const NI_PATTERN = /^ni:\/\/\/sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$/u;
@@ -28,9 +30,14 @@ const V2_KEYS = Object.freeze([
 /** Explicit root for semantic material whose named settlement profile consumes
  * no evidential witnesses. This is a raw canonical-carrier commitment, not a
  * second semantic identity law. */
-const bytesNiUri = (bytes) => `${NI_PREFIX}${createHash("sha256").update(bytes).digest("base64url")}`;
+export function sha256NiUri(bytes) {
+  if (!(bytes instanceof Uint8Array)) {
+    throw refusal("malformed-content-address", "bytes must be a Uint8Array");
+  }
+  return `${NI_PREFIX}${createHash("sha256").update(bytes).digest("base64url")}`;
+}
 
-export const EMPTY_WITNESS_ROOT = bytesNiUri(normalizedCarrierBytes(Object.freeze({
+export const EMPTY_WITNESS_ROOT = sha256NiUri(normalizedCarrierBytes(Object.freeze({
   kind: "semantic-content.empty-witness-bundle",
   version: 1,
 })));
@@ -43,7 +50,7 @@ function refusal(code, message) {
 
 function commitmentOf(value) {
   const bytes = normalizedCarrierBytes(value);
-  const id = bytesNiUri(bytes);
+  const id = sha256NiUri(bytes);
   return Object.freeze({
     id,
     token: id,
@@ -209,6 +216,73 @@ export function identifyJsonSemanticContent({ objectKind, value, witnessRoot } =
   const semanticType = inferTy([], term);
   if (semanticType === null) throw refusal("non-relational-content", "admitted JSON did not derive an RMN type");
   return identifyNormalizedSemanticContent({ objectKind, semanticType, term, witnessRoot });
+}
+
+/** Commit one exact generative proof-path witness as normalized semantic
+ * content. This function commits the proof material; it does not promote the
+ * selected proof profile's verifier into the semantic-identity law. A qualified
+ * verifier must separately reconstruct structureRoot and re-check path. */
+export function identifyProofPathWitness({
+  structureRoot,
+  sourceKey,
+  targetKey,
+  path,
+  proofProfile = GENERATIVE_PROOF_PATH_PROFILE,
+  witnessRoot = EMPTY_WITNESS_ROOT,
+} = {}) {
+  if (proofProfile !== GENERATIVE_PROOF_PATH_PROFILE) {
+    throw refusal("unsupported-proof-path-profile", `unsupported proof-path profile ${String(proofProfile)}`);
+  }
+  const admittedStructureRoot = canonicalNi(structureRoot, "structureRoot");
+  const admittedWitnessRoot = canonicalNi(witnessRoot, "witnessRoot");
+  const admittedSourceKey = canonicalString(sourceKey, "sourceKey");
+  const admittedTargetKey = canonicalString(targetKey, "targetKey");
+  const admittedPath = canonicalString(path, "path");
+  if (admittedSourceKey.length === 0 || admittedTargetKey.length === 0 || admittedPath.length === 0) {
+    throw refusal("malformed-proof-path-witness", "sourceKey, targetKey, and path must be nonempty");
+  }
+  return identifyJsonSemanticContent({
+    objectKind: PROOF_PATH_WITNESS_KIND,
+    value: {
+      version: 1,
+      proofProfile,
+      structureRoot: admittedStructureRoot,
+      sourceKey: admittedSourceKey,
+      targetKey: admittedTargetKey,
+      path: admittedPath,
+    },
+    witnessRoot: admittedWitnessRoot,
+  });
+}
+
+/** Identify JSON semantic content whose identity settlement is explicitly bound
+ * to one content-addressed generative proof-path witness. */
+export function identifyProofPathedJsonSemanticContent({
+  objectKind,
+  value,
+  proofPathWitnessRoot,
+} = {}) {
+  return identifyJsonSemanticContent({
+    objectKind,
+    value,
+    witnessRoot: canonicalNi(proofPathWitnessRoot, "proofPathWitnessRoot"),
+  });
+}
+
+/** Identify raw bytes through the admitted JSON/RMN bridge while binding the
+ * resulting identity to one content-addressed generative proof-path witness. */
+export function identifyProofPathedBytesSemanticContent({
+  objectKind,
+  bytes,
+  mediaType = "application/octet-stream",
+  proofPathWitnessRoot,
+} = {}) {
+  return identifyBytesSemanticContent({
+    objectKind,
+    bytes,
+    mediaType,
+    witnessRoot: canonicalNi(proofPathWitnessRoot, "proofPathWitnessRoot"),
+  });
 }
 
 export function identifyBytesSemanticContent({ objectKind, bytes, mediaType = "application/octet-stream", witnessRoot } = {}) {

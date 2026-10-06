@@ -5,10 +5,14 @@ import {
   admitNormalizedSemanticContent,
   EMPTY_WITNESS_ROOT,
   identifyNormalizedSemanticContent,
+  GENERATIVE_PROOF_PATH_PROFILE,
   IDENTITY_SETTLEMENT_PROFILE,
+  identifyProofPathedJsonSemanticContent,
+  identifyProofPathWitness,
   isCanonicalSha256NiUri,
   RMN_NORMALIZATION_PROFILE,
   sha256DigestBytesFromNiUri,
+  sha256NiUri,
   sha256DigestFromNiUri,
   verifySha256NiUri,
   verifyNormalizedSemanticContent,
@@ -17,6 +21,7 @@ import {
 test("canonical NI parsing and byte verification share the semantic-content boundary", () => {
   const bytes = Buffer.from("semantic-content-ni-api", "utf8");
   const token = "ni:///sha-256;koqacr8nz6PJjJUPQ9zy04JpLJiP3DSvPGDioN_dqBU";
+  assert.equal(sha256NiUri(bytes), token);
   assert.equal(isCanonicalSha256NiUri(token), true);
   assert.equal(sha256DigestFromNiUri(token), token.slice("ni:///sha-256;".length));
   assert.equal(sha256DigestBytesFromNiUri(token).length, 32);
@@ -82,5 +87,64 @@ test("v2 refuses unsupported profiles, malformed witnesses, and mutation", () =>
   assert.throws(
     () => admitNormalizedSemanticContent(changedBytes, identified.token),
     (error) => error.code === "malformed-normalized-content" || error.code === "normalized-content-commitment-mismatch",
+  );
+});
+
+
+test("proof-path witness identity binds exact generative structure and route", () => {
+  const structureRoot = sha256NiUri(Buffer.from("generator-structure-v1", "utf8"));
+  const proof = identifyProofPathWitness({
+    structureRoot,
+    sourceKey: "mark",
+    targetKey: "claim",
+    path: "mark/specialization/library/claim",
+  });
+  assert.equal(isCanonicalSha256NiUri(proof.token), true);
+
+  const admitted = admitNormalizedSemanticContent(proof.bytes, proof.token);
+  assert.equal(admitted.envelope.objectKind, "semiotic-content.proof-path-witness");
+
+  const content = identifyProofPathedJsonSemanticContent({
+    objectKind: "example.proof-pathed-content",
+    value: { payload: "same bytes, exact generating witness matters" },
+    proofPathWitnessRoot: proof.token,
+  });
+  assert.equal(content.envelope.witnessRoot, proof.token);
+
+  const changedProof = identifyProofPathWitness({
+    structureRoot,
+    sourceKey: "mark",
+    targetKey: "claim",
+    path: "mark/object-projection/library/claim",
+    proofProfile: GENERATIVE_PROOF_PATH_PROFILE,
+  });
+  const changedContent = identifyProofPathedJsonSemanticContent({
+    objectKind: "example.proof-pathed-content",
+    value: { payload: "same bytes, exact generating witness matters" },
+    proofPathWitnessRoot: changedProof.token,
+  });
+
+  assert.notEqual(changedProof.token, proof.token);
+  assert.notEqual(changedContent.token, content.token);
+});
+
+test("proof-path witness rejects untyped or noncanonical addressing material", () => {
+  assert.throws(
+    () => identifyProofPathWitness({
+      structureRoot: "sha256:deadbeef",
+      sourceKey: "mark",
+      targetKey: "claim",
+      path: "mark/specialization/library/claim",
+    }),
+    (error) => error.code === "malformed-content-address",
+  );
+  assert.throws(
+    () => identifyProofPathWitness({
+      structureRoot: witnessA,
+      sourceKey: "",
+      targetKey: "claim",
+      path: "mark/specialization/library/claim",
+    }),
+    (error) => error.code === "malformed-proof-path-witness",
   );
 });
