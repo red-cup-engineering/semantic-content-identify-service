@@ -1,0 +1,12 @@
+[package]
+name = "semantic-content-ni"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.81"
+license = "MIT"
+description = "Dependency-light RFC 6920 SHA-256 NI primitive for 561 Group content identity."
+repository = "https://github.com/red-cup-engineering/semantic-content-identify-service"
+
+[dependencies]
+base64 = "0.22"
+sha2 = "0.10"
