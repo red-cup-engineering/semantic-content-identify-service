@@ -49,9 +49,11 @@ canonical bytes -> ni:///sha-256;<unpadded-base64url-digest>
 ```
 
 Use `sha256NiUri(bytes)` to construct that identifier from canonical bytes. Consumers that need only raw byte identity should import the dependency-light `@red-cup-engineering/semantic-content-identify-service/ni` subpath; it loads no RMN normalization or semantic-settlement code.
-For compatibility adapters that already possess a verified raw SHA-256 digest,
+For external protocol adapters that already possess a verified raw SHA-256 digest,
 use `sha256NiUriFromDigestBytes(digestBytes)` to render the same canonical NI
-without re-hashing the digest as content. Declarative schemas that cannot call
+without re-hashing the digest as content. This is not a migration shim for
+discarded internal alpha identifier formats; those should be deleted rather
+than preserved as alternate identities. Declarative schemas that cannot call
 the runtime validator should compose `CANONICAL_SHA256_NI_PATTERN_SOURCE`
 instead of copying the NI grammar. Do not copy the NI regex/formatter into
 downstream packages.
