@@ -13,6 +13,7 @@ import {
   RMN_NORMALIZATION_PROFILE,
   sha256DigestBytesFromNiUri,
   sha256NiUri,
+  sha256NiUriFromDigestBytes,
   sha256DigestFromNiUri,
   verifySha256NiUri,
   verifyNormalizedSemanticContent,
@@ -24,7 +25,13 @@ test("canonical NI parsing and byte verification share the semantic-content boun
   assert.equal(sha256NiUri(bytes), token);
   assert.equal(isCanonicalSha256NiUri(token), true);
   assert.equal(sha256DigestFromNiUri(token), token.slice("ni:///sha-256;".length));
-  assert.equal(sha256DigestBytesFromNiUri(token).length, 32);
+  const digestBytes = sha256DigestBytesFromNiUri(token);
+  assert.equal(digestBytes.length, 32);
+  assert.equal(sha256NiUriFromDigestBytes(digestBytes), token);
+  assert.throws(
+    () => sha256NiUriFromDigestBytes(new Uint8Array(31)),
+    (error) => error.code === "malformed-content-address",
+  );
   assert.equal(verifySha256NiUri(bytes, token), true);
   assert.equal(isCanonicalSha256NiUri(`${token.slice(0, -1)}t`), false);
 });
