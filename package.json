@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/semantic-content-identify-service",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": false,
   "type": "module",
   "description": "Addresses admitted, typed, normalized RMN envelopes with an explicit identity-settlement profile.",
@@ -28,6 +28,10 @@
     ".": {
       "types": "./types/index.d.mts",
       "import": "./src/semantic-content-identity.mjs"
+    },
+    "./ni": {
+      "types": "./types/ni.d.mts",
+      "import": "./src/ni.mjs"
     }
   },
   "files": [

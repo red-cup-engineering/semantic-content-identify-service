@@ -1,3 +1,5 @@
+export * from "./ni.d.mts";
+
 export interface SemanticContentIdentity {
   id: `ni:///sha-256;${string}`;
   token: `ni:///sha-256;${string}`;
@@ -10,15 +12,7 @@ export declare const RMN_NORMALIZATION_PROFILE: "urn:rce:rmn:normalize:0.0.1";
 export declare const IDENTITY_SETTLEMENT_PROFILE: "urn:rce:settlement:identity:0.0.1";
 export declare const GENERATIVE_PROOF_PATH_PROFILE: "urn:rce:proof-path:generative:0.0.1";
 export declare const PROOF_PATH_WITNESS_KIND: "semiotic-content.proof-path-witness";
-export declare const CANONICAL_SHA256_NI_PATTERN_SOURCE: "ni:///sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]";
 export declare const EMPTY_WITNESS_ROOT: `ni:///sha-256;${string}`;
-export declare function sha256NiUriFromDigestBytes(digestBytes: Uint8Array): `ni:///sha-256;${string}`;
-export declare function sha256NiUri(bytes: Uint8Array): `ni:///sha-256;${string}`;
-export declare function isCanonicalSha256NiUri(value: unknown): value is `ni:///sha-256;${string}`;
-export declare function sha256DigestFromNiUri(value: unknown): string;
-export declare function sha256DigestBytesFromNiUri(value: unknown): Uint8Array;
-export declare function verifySha256NiUri(bytes: Uint8Array, value: unknown): boolean;
-
 export interface NormalizedSemanticContentEnvelope<Ty = unknown, Tm = unknown> {
   kind: "relation-model-notation.normalized-semantic-content";
   version: 2;
