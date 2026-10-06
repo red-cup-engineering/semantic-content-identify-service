@@ -51,8 +51,10 @@ canonical bytes -> ni:///sha-256;<unpadded-base64url-digest>
 Use `sha256NiUri(bytes)` to construct that identifier from canonical bytes.
 For compatibility adapters that already possess a verified raw SHA-256 digest,
 use `sha256NiUriFromDigestBytes(digestBytes)` to render the same canonical NI
-without re-hashing the digest as content. Do not copy the NI regex/formatter
-into downstream packages.
+without re-hashing the digest as content. Declarative schemas that cannot call
+the runtime validator should compose `CANONICAL_SHA256_NI_PATTERN_SOURCE`
+instead of copying the NI grammar. Do not copy the NI regex/formatter into
+downstream packages.
 
 Generative provenance is deliberately a separate coordinate from byte identity.
 `identifyProofPathWitness(...)` commits one exact proof-path witness containing

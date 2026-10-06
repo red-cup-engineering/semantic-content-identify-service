@@ -14,7 +14,8 @@ export const GENERATIVE_PROOF_PATH_PROFILE = "urn:rce:proof-path:generative:0.0.
 export const PROOF_PATH_WITNESS_KIND = "semiotic-content.proof-path-witness";
 
 const V2_KIND = "relation-model-notation.normalized-semantic-content";
-const NI_PATTERN = /^ni:\/\/\/sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$/u;
+export const CANONICAL_SHA256_NI_PATTERN_SOURCE = "ni:///sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]";
+const NI_PATTERN = new RegExp(`^${CANONICAL_SHA256_NI_PATTERN_SOURCE}$`, "u");
 const NI_PREFIX = "ni:///sha-256;";
 const V2_KEYS = Object.freeze([
   "kind",

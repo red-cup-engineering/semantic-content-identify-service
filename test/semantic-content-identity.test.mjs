@@ -3,6 +3,7 @@ import test from "node:test";
 import { tm, ty } from "@red-cup-engineering/relation-model-notation";
 import {
   admitNormalizedSemanticContent,
+  CANONICAL_SHA256_NI_PATTERN_SOURCE,
   EMPTY_WITNESS_ROOT,
   identifyNormalizedSemanticContent,
   GENERATIVE_PROOF_PATH_PROFILE,
@@ -24,6 +25,7 @@ test("canonical NI parsing and byte verification share the semantic-content boun
   const token = "ni:///sha-256;koqacr8nz6PJjJUPQ9zy04JpLJiP3DSvPGDioN_dqBU";
   assert.equal(sha256NiUri(bytes), token);
   assert.equal(isCanonicalSha256NiUri(token), true);
+  assert.equal(new RegExp(`^${CANONICAL_SHA256_NI_PATTERN_SOURCE}$`, "u").test(token), true);
   assert.equal(sha256DigestFromNiUri(token), token.slice("ni:///sha-256;".length));
   const digestBytes = sha256DigestBytesFromNiUri(token);
   assert.equal(digestBytes.length, 32);
