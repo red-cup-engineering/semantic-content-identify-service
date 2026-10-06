@@ -11,6 +11,7 @@ export declare const IDENTITY_SETTLEMENT_PROFILE: "urn:rce:settlement:identity:0
 export declare const GENERATIVE_PROOF_PATH_PROFILE: "urn:rce:proof-path:generative:0.0.1";
 export declare const PROOF_PATH_WITNESS_KIND: "semiotic-content.proof-path-witness";
 export declare const EMPTY_WITNESS_ROOT: `ni:///sha-256;${string}`;
+export declare function sha256NiUriFromDigestBytes(digestBytes: Uint8Array): `ni:///sha-256;${string}`;
 export declare function sha256NiUri(bytes: Uint8Array): `ni:///sha-256;${string}`;
 export declare function isCanonicalSha256NiUri(value: unknown): value is `ni:///sha-256;${string}`;
 export declare function sha256DigestFromNiUri(value: unknown): string;
