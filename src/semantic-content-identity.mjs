@@ -1,7 +1,10 @@
 import {
-  decodeNormalizedCarrier,
-  normalizedCarrierBytes,
+  decodeCanonical,
+  encodeCanonical,
 } from "@red-cup-engineering/relation-model-notation-cbor-codec";
+import { canonicalizeSemioticJson } from "@red-cup-engineering/canonicalize-semiotic-json-service";
+const normalizedCarrierBytes = value => encodeCanonical(canonicalizeSemioticJson(value));
+const decodeNormalizedCarrier = bytes => canonicalizeSemioticJson(decodeCanonical(bytes));
 import { isDeepStrictEqual } from "node:util";
 import { normalize as normalizeRmn001 } from "@red-cup-engineering/relation-model-notation-eval";
 import { jsonToTerm, termToJson } from "@red-cup-engineering/relation-model-notation-json-codec";
