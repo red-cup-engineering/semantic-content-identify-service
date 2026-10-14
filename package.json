@@ -48,11 +48,11 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@red-cup-engineering/relation-model-notation": "0.0.1",
+    "@red-cup-engineering/relation-model-notation": "workspace:*",
     "@red-cup-engineering/relation-model-notation-cbor-codec": "workspace:*",
-    "@red-cup-engineering/relation-model-notation-eval": "0.0.2",
+    "@red-cup-engineering/relation-model-notation-eval": "workspace:*",
     "@red-cup-engineering/relation-model-notation-json-codec": "workspace:*",
-    "@red-cup-engineering/relation-model-notation-typing": "0.0.1",
+    "@red-cup-engineering/relation-model-notation-typing": "workspace:*",
     "@red-cup-engineering/canonicalize-semiotic-json-service": "workspace:*"
   }
 }
