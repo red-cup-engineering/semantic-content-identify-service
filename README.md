@@ -1,4 +1,31 @@
-# Semantic Content Identify Service
+# Semantic Content Identify Service — historical RMN v2 external face
+
+**Not an active source of the 561 Group's internal content-identity law.**
+This repository preserves its previously released/public RMN v2 protocol and
+hosted Deno HTTP entry while identified external consumers, deployed grants
+and historical receipts are still attached. Its npm manifest is now private
+to prevent publishing additional versions of the nonconformant standalone
+source. That does not revoke a historical package or change a live endpoint.
+
+For new engineering source, resolve the actual owners instead of renaming this
+repository into another section:
+- RFC 6920 NI codec: `uri-services-section/ni-uri`;
+- exact carrier bytes and raw address records:
+  `computer-data-engineering-services-section/lib/semiotic-content-address`;
+- SEN v3 typed envelope: Computer Data's `semiotic-expression-notation/semantic-content-identity`;
+- SEN reduction and normalized content identity: Computer Code's
+  `semiotic-expression-notation/runtime/semantic-content-identity`;
+- the public HTTP invocation boundary: Networking plus its separately
+  installed and authorized host, not a new source of hashing or type law.
+
+**Do not conflate historical RMN v2 envelopes with current SEN v3.**
+The same RFC 6920 NI URI syntax says that canonical bytes were named; it
+does not establish semantic-equivalence between different envelope profiles.
+Retain the existing v2 API as an explicitly versioned foreign/public carrier
+until its exact actual consumers and hosting are migrated. Do not introduce
+new direct imports from this repository.
+
+---
 
 A public Capability Cell that binds the distinctions required before semantic
 identity in one normalized RMN v2 envelope:
@@ -41,14 +68,18 @@ explicitly absent; the public GitHub release tarball is the package carrier.
 
 ## Canonical proof-pathed NI addressing
 
-This package is the current executable primitive for the Group's internal byte
-identity law:
+For existing external RMN v2 consumers, this package **historically exported**
+a duplicate NI primitive with the same public byte-address spelling.
+The current internal executable source of NI syntax and verification is
+URI Services, not this module. The legacy output form is:
 
 ```text
 canonical bytes -> ni:///sha-256;<unpadded-base64url-digest>
 ```
 
-Use `sha256NiUri(bytes)` to construct that identifier from canonical bytes. Consumers that need only raw byte identity should import the dependency-light `@red-cup-engineering/semantic-content-identify-service/ni` subpath; it loads no RMN normalization or semantic-settlement code.
+Historical clients can read `sha256NiUri(bytes)` and the `./ni` subpath for their
+existing versioned contract; **new internal consumers must import the
+URI Services `./ni-uri` primitive**, not this historical package.
 For compatibility adapters that already possess a verified raw SHA-256 digest,
 use `sha256NiUriFromDigestBytes(digestBytes)` to render the same canonical NI
 without re-hashing the digest as content. Declarative schemas that cannot call

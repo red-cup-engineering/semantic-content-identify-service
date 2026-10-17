@@ -1,9 +1,9 @@
 {
   "name": "@red-cup-engineering/semantic-content-identify-service",
   "version": "0.2.5",
-  "private": false,
+  "private": true,
   "type": "module",
-  "description": "Addresses admitted, typed, normalized RMN envelopes with an explicit identity-settlement profile.",
+  "description": "Historical public RMN v2 identity face; no longer a canonical internal NI or SEN producer.",
   "keywords": [
     "rmn",
     "cbor",
@@ -17,10 +17,6 @@
     "url": "git+https://github.com/red-cup-engineering/semantic-content-identify-service.git"
   },
   "homepage": "https://semantic-content-identity.actions.561.group/",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "bin": {
     "semantic-content-identity": "./scripts/semantic-content-identity.mjs"
   },
