@@ -50,5 +50,9 @@
     "@red-cup-engineering/relation-model-notation-json-codec": "workspace:*",
     "@red-cup-engineering/relation-model-notation-typing": "workspace:*",
     "@red-cup-engineering/canonicalize-semiotic-json-service": "workspace:*"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
   }
 }
