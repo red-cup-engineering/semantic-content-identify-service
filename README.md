@@ -124,3 +124,5 @@ Git OIDs, CIDs/IPFS references, EVM hashes, URLs, filesystem paths, package
 versions, and other carrier-local identifiers remain legitimate typed external
 coordinates. They are not alternate internal canonical content identities.
 Compatibility belongs at ingress/egress adapters.
+
+[Published source revisions and downloads](data/releases/README.md)
