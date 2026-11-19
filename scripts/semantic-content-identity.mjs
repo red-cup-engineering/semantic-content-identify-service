@@ -4,7 +4,7 @@ import { identifyNormalizedSemanticContent } from "../src/semantic-content-ident
 
 const content = JSON.parse(readFileSync(0, "utf8"));
 const identity = identifyNormalizedSemanticContent(content);
-const { bytes, ...receipt } = identity;
+const { bytes, ...record } = identity;
 const outputIndex = process.argv.indexOf("--output");
 const output = outputIndex === -1 ? undefined : process.argv[outputIndex + 1];
 if (outputIndex !== -1 && (typeof output !== "string" || output.length === 0)) {
@@ -15,7 +15,7 @@ if (output !== undefined) writeFileSync(output, bytes, {
   mode: 0o644,
 });
 process.stdout.write(`${JSON.stringify({
-  ...receipt,
+  ...record,
   ...(output === undefined
     ? { bytes: Buffer.from(bytes).toString("base64") }
     : { output, byteLength: bytes.length }),
