@@ -48,7 +48,8 @@
     "@red-cup-engineering/relation-model-notation-eval": "workspace:*",
     "@red-cup-engineering/relation-model-notation-json-codec": "workspace:*",
     "@red-cup-engineering/relation-model-notation-typing": "workspace:*",
-    "@red-cup-engineering/canonicalize-semiotic-json-service": "workspace:*"
+    "@red-cup-engineering/canonicalize-semiotic-json-service": "workspace:*",
+    "@red-cup-engineering/signcell": "^0.18.0 || 0.18.1-dev.0"
   },
   "funding": {
     "type": "individual",

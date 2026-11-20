@@ -1,3 +1,4 @@
+import { deepFreeze } from "@red-cup-engineering/signcell/values";
 import {
   decodeCanonical,
   encodeCanonical,
@@ -70,14 +71,8 @@ function commitmentOf(value) {
 
 function immutableCopy(value) {
   const copy = structuredClone(value);
-  const freeze = (node) => {
-    if (node !== null && typeof node === "object") {
-      for (const child of Object.values(node)) freeze(child);
-      Object.freeze(node);
-    }
-    return node;
-  };
-  return freeze(copy);
+  
+  return deepFreeze(copy);
 }
 
 function canonicalNi(value, field) {
