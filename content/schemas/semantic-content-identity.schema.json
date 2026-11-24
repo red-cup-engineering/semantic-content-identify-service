@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/red-cup-engineering/semantic-content-identify-service/blob/main/content/schemas/semantic-content-identity.schema.json",
+  "type": "object",
+  "required": ["id", "token", "algorithm", "mediaType", "envelope", "bytes"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^ni:///sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"},
+    "algorithm": {"const": "sha-256"},
+    "mediaType": {"const": "application/rmn+cbor"},
+    "token": {"type": "string", "pattern": "^ni:///sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"},
+    "envelope": {
+      "type": "object",
+      "required": ["kind", "version", "objectKind", "semanticType", "normalizationProfile", "settlementProfile", "settledBody", "witnessRoot"],
+      "properties": {
+        "kind": {"const": "relation-model-notation.normalized-semantic-content"},
+        "version": {"const": 2},
+        "objectKind": {"type": "string", "minLength": 1},
+        "semanticType": {},
+        "normalizationProfile": {"const": "urn:rce:rmn:normalize:0.0.1"},
+        "settlementProfile": {"const": "urn:rce:settlement:identity:0.0.1"},
+        "settledBody": {},
+        "witnessRoot": {"type": "string", "pattern": "^ni:///sha-256;[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"}
+      },
+      "additionalProperties": false
+    },
+    "bytes": {"type": "string", "contentEncoding": "base64"}
+  },
+  "additionalProperties": false
+}

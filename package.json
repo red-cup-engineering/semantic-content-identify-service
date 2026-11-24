@@ -1,0 +1,58 @@
+{
+  "name": "@red-cup-engineering/semantic-content-identify-service",
+  "version": "0.2.5",
+  "private": true,
+  "type": "module",
+  "description": "Historical public RMN v2 identity face; no longer a canonical internal NI or SEN producer.",
+  "keywords": [
+    "rmn",
+    "cbor",
+    "rfc6920",
+    "semantic-identity",
+    "capability-cell"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/semantic-content-identify-service.git"
+  },
+  "homepage": "https://semantic-content-identity.actions.561.group/",
+  "bin": {
+    "semantic-content-identity": "./scripts/semantic-content-identity.mjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.mts",
+      "import": "./src/semantic-content-identity.mjs"
+    },
+    "./ni": {
+      "types": "./types/ni.d.mts",
+      "import": "./src/ni.mjs"
+    }
+  },
+  "files": [
+    "scripts/",
+    "content/",
+    "src/",
+    "types/"
+  ],
+  "scripts": {
+    "verify": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@red-cup-engineering/relation-model-notation": "workspace:*",
+    "@red-cup-engineering/relation-model-notation-cbor-codec": "workspace:*",
+    "@red-cup-engineering/relation-model-notation-eval": "workspace:*",
+    "@red-cup-engineering/relation-model-notation-json-codec": "workspace:*",
+    "@red-cup-engineering/relation-model-notation-typing": "workspace:*",
+    "@red-cup-engineering/canonicalize-semiotic-json-service": "workspace:*",
+    "@red-cup-engineering/signcell": "^0.18.0 || 0.18.1-dev.0"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
+  }
+}
