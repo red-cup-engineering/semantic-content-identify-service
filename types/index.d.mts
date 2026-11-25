@@ -1,5 +1,3 @@
-export * from "./ni.d.mts";
-
 export interface SemanticContentIdentity {
   id: `ni:///sha-256;${string}`;
   token: `ni:///sha-256;${string}`;
