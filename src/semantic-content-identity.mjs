@@ -1,33 +1,11 @@
+import { canonicalizeSemioticJson, decodeCanonical, encodeCanonical, isNiUri, makeNiUri } from "@red-cup-engineering/semiotic-content-address-system";
 import { deepFreeze } from "@red-cup-engineering/signcell/values";
-import {
-  decodeCanonical,
-  encodeCanonical,
-} from "@red-cup-engineering/relation-model-notation-cbor-codec";
-import { canonicalizeSemioticJson } from "@red-cup-engineering/canonicalize-semiotic-json-service";
 const normalizedCarrierBytes = value => encodeCanonical(canonicalizeSemioticJson(value));
 const decodeNormalizedCarrier = bytes => canonicalizeSemioticJson(decodeCanonical(bytes));
 import { isDeepStrictEqual } from "node:util";
 import { normalize as normalizeRmn001 } from "@red-cup-engineering/relation-model-notation-eval";
 import { jsonToTerm, termToJson } from "@red-cup-engineering/relation-model-notation-json-codec";
 import { checkTy, inferTy, isClosed } from "@red-cup-engineering/relation-model-notation-typing";
-import {
-  CANONICAL_SHA256_NI_PATTERN_SOURCE,
-  isCanonicalSha256NiUri,
-  sha256DigestBytesFromNiUri,
-  sha256DigestFromNiUri,
-  sha256NiUri,
-  sha256NiUriFromDigestBytes,
-  verifySha256NiUri,
-} from "./ni.mjs";
-export {
-  CANONICAL_SHA256_NI_PATTERN_SOURCE,
-  isCanonicalSha256NiUri,
-  sha256DigestBytesFromNiUri,
-  sha256DigestFromNiUri,
-  sha256NiUri,
-  sha256NiUriFromDigestBytes,
-  verifySha256NiUri,
-} from "./ni.mjs";
 
 export const RMN_NORMALIZATION_PROFILE = "urn:rce:rmn:normalize:0.0.1";
 export const IDENTITY_SETTLEMENT_PROFILE = "urn:rce:settlement:identity:0.0.1";
@@ -46,7 +24,7 @@ const V2_KEYS = Object.freeze([
   "witnessRoot",
 ]);
 
-export const EMPTY_WITNESS_ROOT = sha256NiUri(normalizedCarrierBytes(Object.freeze({
+export const EMPTY_WITNESS_ROOT = makeNiUri(normalizedCarrierBytes(Object.freeze({
   kind: "semantic-content.empty-witness-bundle",
   version: 1,
 })));
@@ -59,7 +37,7 @@ function refusal(code, message) {
 
 function commitmentOf(value) {
   const bytes = normalizedCarrierBytes(value);
-  const id = sha256NiUri(bytes);
+  const id = makeNiUri(bytes);
   return Object.freeze({
     id,
     token: id,
@@ -76,7 +54,7 @@ function immutableCopy(value) {
 }
 
 function canonicalNi(value, field) {
-  if (!isCanonicalSha256NiUri(value)) {
+  if (!isNiUri(value)) {
     throw refusal("malformed-content-address", `${field} must be one canonical RFC 6920 SHA-256 ni URI`);
   }
   return value;
